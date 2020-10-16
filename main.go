@@ -53,6 +53,18 @@ func main() {
 					},
 				},
 			},
+			{
+				Name:   "logs",
+				Usage:  "logs",
+				Action: commands.Logs,
+				Flags: []cli.Flag{
+					&cli.Int64Flag{
+						Name:    "container-index",
+						Aliases: []string{"ci"},
+						Value:   -1,
+					},
+				},
+			},
 		},
 	}
 

@@ -6,15 +6,18 @@ func NewConfigFromCliContext(c *cli.Context) Config {
 	kubeconfig := c.String("kubeconfig")
 	namespace := c.String("namespace")
 	labels := c.StringSlice("labels")
-	command := c.String("command")
 	if c.Bool("all-namespaces") {
 		namespace = ""
 	}
+
+	runConfig := newRunConfig(c)
+	logsConfig := newLogsConfig(c)
 
 	return Config{
 		Kubeconfig: kubeconfig,
 		Namespace:  namespace,
 		Labels:     labels,
-		Command:    command,
+		RunConfig:  runConfig,
+		LogsConfig: logsConfig,
 	}
 }

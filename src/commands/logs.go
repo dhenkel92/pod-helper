@@ -9,12 +9,12 @@ import (
 	v1 "k8s.io/api/core/v1"
 )
 
-type Result struct {
+type LogResult struct {
 	ExecResult kube.ExecResult
 	Pod        v1.Pod
 }
 
-func (result *Result) print() {
+func (result *LogResult) print() {
 	log.Info.Println("----------------------------------------")
 	log.Info.Println(Green(result.Pod.Name))
 	log.Info.Println(Green("Successful"))
@@ -22,7 +22,7 @@ func (result *Result) print() {
 	log.Info.Println("----------------------------------------")
 }
 
-func Run(c *cli.Context) error {
+func Logs(c *cli.Context) error {
 	cliConf := config.NewConfigFromCliContext(c)
 
 	clientset, err := kube.NewClientset(cliConf.Kubeconfig)
@@ -40,13 +40,13 @@ func Run(c *cli.Context) error {
 		return err
 	}
 
-	var results []Result
+	var results []LogResult
 	for _, pod := range pods.Items {
 		c := make(chan kube.ExecResult)
-		go podExec.Exec(c, &cliConf, &pod)
+		go podExec.Logs(c, &cliConf, &pod)
 		res := <-c
 
-		results = append(results, Result{ExecResult: res, Pod: pod})
+		results = append(results, LogResult{ExecResult: res, Pod: pod})
 	}
 
 	for _, res := range results {
