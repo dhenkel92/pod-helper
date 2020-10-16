@@ -1,7 +1,9 @@
 package main
 
 import (
+	"k8s.io/client-go/util/homedir"
 	"os"
+	"path/filepath"
 	"sort"
 
 	"github.com/dhenkel92/pod-exec/src/commands"
@@ -15,10 +17,15 @@ func main() {
 		Usage: "do smth",
 		Flags: []cli.Flag{
 			&cli.StringFlag{
+				Name:    "kubeconfig",
+				Aliases: []string{"config"},
+				Value:   filepath.Join(homedir.HomeDir(), ".kube", "config"),
+			},
+			&cli.StringFlag{
 				Name:     "namespace",
 				Aliases:  []string{"n"},
 				Usage:    "select namespace",
-				Value:    "",
+				Value:    "default",
 				Required: false,
 			},
 			&cli.StringSliceFlag{
@@ -26,6 +33,11 @@ func main() {
 				Aliases:  []string{"l"},
 				Value:    &cli.StringSlice{},
 				Required: false,
+			},
+			&cli.BoolFlag{
+				Name:    "all-namespaces",
+				Aliases: []string{"all", "a"},
+				Value:   false,
 			},
 		},
 		Commands: []*cli.Command{

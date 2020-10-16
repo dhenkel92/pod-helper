@@ -1,16 +1,12 @@
 package commands
 
 import (
-	"path/filepath"
-	"strings"
-
+	"github.com/dhenkel92/pod-exec/src/config"
 	"github.com/dhenkel92/pod-exec/src/kube"
 	"github.com/dhenkel92/pod-exec/src/log"
 	. "github.com/logrusorgru/aurora"
 	"github.com/urfave/cli/v2"
 	v1 "k8s.io/api/core/v1"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	"k8s.io/client-go/util/homedir"
 )
 
 type Result struct {
@@ -18,47 +14,43 @@ type Result struct {
 	Pod        *v1.Pod
 }
 
-func printResult(result *Result) {
+func (result *Result) print() {
 	log.Info.Println("----------------------------------------")
 	log.Info.Println(Green(result.Pod.Name))
 	log.Info.Println(Green("Successful"))
-	log.Info.Printf("Result:\n%s\n\n", result.ExecResult.StdOut)
+	log.Info.Printf("Result:\n%s", result.ExecResult.StdOut)
 	log.Info.Println("----------------------------------------")
 }
 
 func Run(c *cli.Context) error {
-	namespace := c.String("namespace")
-	labels := c.StringSlice("labels")
-	command := c.String("command")
+	cliConf := config.NewConfigFromCliContext(c)
 
-	kubeconfig := filepath.Join(homedir.HomeDir(), ".kube", "config")
-	clientset, err := kube.NewClientset(kubeconfig)
+	clientset, err := kube.NewClientset(cliConf.Kubeconfig)
 	if err != nil {
 		return err
 	}
 
-	podExec, err := kube.NewPodExecutor(kubeconfig)
+	podExec, err := kube.NewPodExecutor(cliConf.Kubeconfig)
 	if err != nil {
 		return err
 	}
 
-	pods, err := clientset.CoreV1().Pods(namespace).List(metav1.ListOptions{LabelSelector: strings.Join(labels, ",")})
+	pods, err := kube.ListPods(clientset, cliConf.Namespace, cliConf.Labels)
 	if err != nil {
 		return err
 	}
-	log.Trace.Printf("%d pods in ns %s\n", len(pods.Items), namespace)
 
 	var results []Result
 	for _, pod := range pods.Items {
 		c := make(chan kube.ExecResult)
-		go podExec.Exec(c, command, &pod)
+		go podExec.Exec(c, cliConf.Command, &pod)
 		res := <-c
 
 		results = append(results, Result{ExecResult: res, Pod: &pod})
 	}
 
 	for _, res := range results {
-		printResult(&res)
+		res.print()
 	}
 
 	return nil
