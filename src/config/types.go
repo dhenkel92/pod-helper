@@ -9,9 +9,11 @@ type Config struct {
 }
 
 type RunConfig struct {
-	Command []string
+	Entrypoint []string
+	Command    string
 }
 
 type LogsConfig struct {
 	ContainerIndex int64
+	Tail           int64
 }

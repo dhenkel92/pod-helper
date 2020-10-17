@@ -12,6 +12,9 @@ func (podExec *PodExecutor) Logs(c chan ExecResult, conf *config.Config, pod *v1
 	if conf.LogsConfig.ContainerIndex >= 0 {
 		options.Container = pod.Spec.Containers[conf.LogsConfig.ContainerIndex].Name
 	}
+	if conf.LogsConfig.Tail >= 0 {
+		options.TailLines = &conf.LogsConfig.Tail
+	}
 
 	req := podExec.Clientset.CoreV1().Pods(pod.Namespace).GetLogs(pod.Name, &options)
 	podLogs, err := req.Stream()
