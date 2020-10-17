@@ -20,8 +20,8 @@ jobs:
     - uses: actions/setup-python@v2
     - name: Install required GO libs
       run: |
+        go mod download
         go get github.com/fzipp/gocyclo/cmd/gocyclo
-        go get golang.org/x/lint/golint
     - uses: pre-commit/action@v2.0.0
   release:
     runs-on: ubuntu-latest
