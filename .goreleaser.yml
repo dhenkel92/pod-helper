@@ -22,6 +22,16 @@ checksum:
   name_template: 'checksums.txt'
 snapshot:
   name_template: "{{ .Tag }}-next"
+brews:
+  - tap:
+      owner: dhenkel92
+      name: homebrew-tap
+      token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
+    folder: Formula
+    homepage: https://github.com/dhenkel92/pod-helper
+    description: Kubernetes Pod Helper Util
+    test: |
+      system "#{bin}/pod-helper -h"
 changelog:
   sort: asc
   filters:
