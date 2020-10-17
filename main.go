@@ -47,6 +47,12 @@ func main() {
 				Action: commands.Run,
 				Flags: []cli.Flag{
 					&cli.StringFlag{
+						Name:     "entrypoint",
+						Aliases:  []string{"e", "entry"},
+						Required: false,
+						Value:    "/bin/sh -c",
+					},
+					&cli.StringFlag{
 						Name:     "command",
 						Aliases:  []string{"c"},
 						Required: true,
@@ -61,6 +67,11 @@ func main() {
 					&cli.Int64Flag{
 						Name:    "container-index",
 						Aliases: []string{"ci"},
+						Value:   -1,
+					},
+					&cli.Int64Flag{
+						Name:    "tail",
+						Aliases: []string{"t"},
 						Value:   -1,
 					},
 				},

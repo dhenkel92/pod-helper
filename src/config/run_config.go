@@ -6,8 +6,11 @@ import (
 )
 
 func newRunConfig(c *cli.Context) RunConfig {
+	entrypoint := c.String("entrypoint")
 	command := c.String("command")
-	commands := strings.Split(command, " ")
 
-	return RunConfig{Command: commands}
+	return RunConfig{
+		Entrypoint: strings.Split(entrypoint, " "),
+		Command:    command,
+	}
 }

@@ -3,13 +3,12 @@ package kube
 import (
 	"bytes"
 	"github.com/dhenkel92/pod-helper/src/config"
-
 	v1 "k8s.io/api/core/v1"
 	"k8s.io/client-go/kubernetes/scheme"
 	"k8s.io/client-go/tools/remotecommand"
 )
 
-func (podExec *PodExecutor) Exec(c chan ExecResult, conf *config.Config, pod *v1.Pod) {
+func (podExec *PodExecutor) Run(c chan ExecResult, conf *config.Config, pod *v1.Pod) {
 	req := podExec.Clientset.
 		CoreV1().
 		RESTClient().
@@ -20,7 +19,7 @@ func (podExec *PodExecutor) Exec(c chan ExecResult, conf *config.Config, pod *v1
 		SubResource("exec")
 
 	option := &v1.PodExecOptions{
-		Command: conf.RunConfig.Command,
+		Command: append(conf.RunConfig.Entrypoint, conf.RunConfig.Command),
 		Stdin:   false,
 		Stdout:  true,
 		Stderr:  true,
@@ -39,7 +38,7 @@ func (podExec *PodExecutor) Exec(c chan ExecResult, conf *config.Config, pod *v1
 		Stderr: &stderr,
 	})
 	if err != nil {
-		c <- ExecResult{Error: err}
+		c <- ExecResult{Error: err, StdErr: stderr.String(), StdOut: stdout.String()}
 		return
 	}
 
