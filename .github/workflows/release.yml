@@ -18,6 +18,10 @@ jobs:
       with:
         go-version: 1.15
     - uses: actions/setup-python@v2
+    - name: Install required GO libs
+      run: |
+        go get github.com/fzipp/gocyclo/cmd/gocyclo
+        go get golang.org/x/lint/golint
     - uses: pre-commit/action@v2.0.0
   release:
     runs-on: ubuntu-latest
