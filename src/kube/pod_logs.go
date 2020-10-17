@@ -2,7 +2,7 @@ package kube
 
 import (
 	"bytes"
-	"github.com/dhenkel92/pod-exec/src/config"
+	"github.com/dhenkel92/pod-helper/src/config"
 	"io"
 	v1 "k8s.io/api/core/v1"
 )

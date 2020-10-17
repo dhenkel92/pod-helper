@@ -1,9 +1,9 @@
 package commands
 
 import (
-	"github.com/dhenkel92/pod-exec/src/config"
-	"github.com/dhenkel92/pod-exec/src/kube"
-	"github.com/dhenkel92/pod-exec/src/log"
+	"github.com/dhenkel92/pod-helper/src/config"
+	"github.com/dhenkel92/pod-helper/src/kube"
+	"github.com/dhenkel92/pod-helper/src/log"
 	. "github.com/logrusorgru/aurora"
 	"github.com/urfave/cli/v2"
 	v1 "k8s.io/api/core/v1"

@@ -1,4 +1,4 @@
-module github.com/dhenkel92/pod-exec
+module github.com/dhenkel92/pod-helper
 
 go 1.15
 

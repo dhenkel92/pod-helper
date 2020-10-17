@@ -6,8 +6,8 @@ import (
 	"path/filepath"
 	"sort"
 
-	"github.com/dhenkel92/pod-exec/src/commands"
-	"github.com/dhenkel92/pod-exec/src/log"
+	"github.com/dhenkel92/pod-helper/src/commands"
+	"github.com/dhenkel92/pod-helper/src/log"
 	"github.com/urfave/cli/v2"
 )
 
