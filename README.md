@@ -26,6 +26,8 @@
 * [Prerequisites](#prerequisites)
 * [Installation](#installation)
 * [Usage](#usage)
+  * [Run](#run)
+  * [Logs](#logs)
 * [Contributing](#contributing)
 * [License](#license)
 * [Contact](#contact)
@@ -80,7 +82,58 @@ See the [Releases page](https://github.com/dhenkel92/pod-helper/releases) for a 
 
 ## Usage
 
-WIP
+### Run
+
+Run `ls -al` in all pods of the default namespace
+```shell script
+pod-helper --namespace default run --command "ls -al"
+or short
+pod-helper -n default run -c "ls -al"
+```
+
+Run `ls -al` in all the pods
+```shell script
+pod-helper --all-namespaces run --comand "ls -al"
+or short
+pod-helper -a run -c "ls -al"
+```
+
+Override the etnrypoint for the command execution (default `/bin/sh -c`)
+```shell script
+pod-helper --all-namespaces run --entrypoint "/bin/bash -c" --comand "ls -al"
+or short
+pod-helper -a run -e "/bin/bash -c" -c "ls -al"
+```
+
+Select pod by label selector
+```shell script
+pod-helper --all-namespaces --label app=nginx run --command "ls -al"
+or short
+pod-helper -a -l app=nginx run --command "ls -al"
+```
+
+### Logs
+
+Get all logs from all the pods in the cluster
+```shell script
+pod-helper --all-namespaces logs
+or short
+pod-helper -a logs
+```
+
+Get all logs from all pods in the kube-system namespace
+```shell script
+pod-helper --namespace kube-system logs
+or short
+pod-helper -n kube-system logs
+```
+
+Get the last ten log entries of all the pods
+```shell script
+pod-helper --all-namespaces logs --tail 10
+or short
+pod-helper -a logs -t 10
+```
 
 ## Contributing
 
