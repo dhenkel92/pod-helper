@@ -1,10 +1,5 @@
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
-
+![Main](https://github.com/dhenkel92/pod-helper/workflows/Main/badge.svg)
+![Release](https://github.com/dhenkel92/pod-helper/workflows/Release/badge.svg)
 
 
 <!-- PROJECT LOGO -->
@@ -13,7 +8,7 @@
   <h3 align="center">Kubernetes Pod Helper</h3>
 
   <p align="center">
-    An awesome README template to jumpstart your projects!
+    A tool to easily operate on multiple pods at the same time!
     <br />
     <br />
     <a href="https://github.com/dhenkel92/pod-helper/issues">Report Bug</a>
@@ -43,20 +38,17 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+![Product Name Screen Shot](images/pod_helper_example.gif)
 
-There are many great README templates available on GitHub, however, I didn't find one that really suit my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need.
+In my day to day job i often need to debug pods in a kubernetes cluster or need to get logs from all of them. However, with the default tools, provided by kubernetes, it's super hard and time consuming to do it.
+This is why I decided to build a small helper tool in order to keep us productive and less annoyed.
 
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should element DRY principles to the rest of your life :smile:
+I've tried to solve the following problems:
+* Get Logs from multiple containers in one stream
+* Execute a command in multiple pods
+* Follow Logs of multiple pods (WIP)
+* Exec into multiple pods with an interactive shell (WIP)
 
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue.
-
-A list of commonly used resources that I find helpful are listed in the acknowledgements.
-
-<!-- GETTING STARTED -->
 ## Getting Started
 
 This is an example of how you may give instructions on setting up your project locally.
@@ -64,105 +56,71 @@ To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-```sh
-npm install npm@latest -g
-```
+#### Runtime
+
+* A functional Kubernetes cluster (tested with >= 1.17)
+
+#### Development
+
+* [Golang](https://golang.org/) >= 1.15
+* [pre-commit](https://pre-commit.com/) >= 2.0
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-```sh
-git clone https://github.com/your_username_/Project-Name.git
+#### MacOS
+
+You can install the tool via Homebrew and the tap repository can be found [here.](https://github.com/dhenkel92/homebrew-tap)
 ```
-3. Install NPM packages
-```sh
-npm install
+brew install dhenkel92/tap/pod-helper
 ```
-4. Enter your API in `config.js`
-```JS
-const API_KEY = 'ENTER YOUR API';
+
+In order to get a newer version, just upgrade via Homebrew
+```
+brew upgrade dhenkel92/tap/pod-helper
 ```
 
 
+#### Other distributions
 
-<!-- USAGE EXAMPLES -->
+See the [Releases page](https://github.com/dhenkel92/pod-helper/releases) for a list of Peek packages for various distributions.
+
+
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+WIP
 
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-
-
-<!-- ROADMAP -->
-## Roadmap
-
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a list of proposed features (and known issues).
-
-
-
-<!-- CONTRIBUTING -->
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
 1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+2. Create your Feature Branch (`git checkout -b feature/amazing_feature`)
 3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
+4. Push to the Branch (`git push origin feature/amazing_feature`)
 5. Open a Pull Request
 
 
-
-<!-- LICENSE -->
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
 
-
-<!-- CONTACT -->
 ## Contact
 
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
+Daniel Henkel - daniel@henkel.tech
 
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+Project Link: [https://github.com/dhenkel92/pod-helper](https://github.com/dhenkel92/pod-helper)
 
 
-
-<!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
-* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-* [Img Shields](https://shields.io)
+* [pre-commit](https://pre-commit.com/)
+* [Goreleaser](https://goreleaser.com/)
+* [Cli](https://github.com/urfave/cli)
+* [Aurora](https://github.com/logrusorgru/aurora)
 * [Choose an Open Source License](https://choosealicense.com)
-* [GitHub Pages](https://pages.github.com)
-* [Animate.css](https://daneden.github.io/animate.css)
-* [Loaders.css](https://connoratherton.com/loaders)
-* [Slick Carousel](https://kenwheeler.github.io/slick)
-* [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
-* [Sticky Kit](http://leafo.net/sticky-kit)
-* [JVectorMap](http://jvectormap.com)
-* [Font Awesome](https://fontawesome.com)
-
-
-
+* [README template](https://github.com/othneildrew/Best-README-Template)
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=flat-square
-[contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=flat-square
-[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=flat-square
-[stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=flat-square
-[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
-[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=flat-square
-[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/othneildrew
-[product-screenshot]: images/pod_helper_example.gif
+[product-screenshot]:
