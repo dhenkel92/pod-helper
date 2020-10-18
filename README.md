@@ -82,6 +82,16 @@ See the [Releases page](https://github.com/dhenkel92/pod-helper/releases) for a 
 
 ## Usage
 
+
+### General
+
+Use different .kubeconfig file than `~/.kube/config`
+```shell script
+pod-helper --kubeconfig /kube/config logs
+or short
+pod-helper -config /kube/config logs
+```
+
 ### Run
 
 Run `ls -al` in all pods of the default namespace
@@ -133,6 +143,20 @@ Get the last ten log entries of all the pods
 pod-helper --all-namespaces logs --tail 10
 or short
 pod-helper -a logs -t 10
+```
+
+Get logs of the first container in all pods in the cluster
+```shell script
+pod-helper --all-namespaces --container-index 0 logs
+or short
+pod-helper -a -ci 0 logs
+```
+
+Get logs of containers mit name `nginx`.
+```shell script
+pod-helper --all-namespaces --container nginx logs
+or short
+pod-helper -a -con nginx logs
 ```
 
 ## Contributing
