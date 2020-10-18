@@ -23,9 +23,8 @@
 ## Table of Contents
 
 * [About the Project](#about-the-project)
-* [Getting Started](#getting-started)
-  * [Prerequisites](#prerequisites)
-  * [Installation](#installation)
+* [Prerequisites](#prerequisites)
+* [Installation](#installation)
 * [Usage](#usage)
 * [Roadmap](#roadmap)
 * [Contributing](#contributing)
@@ -49,25 +48,20 @@ I've tried to solve the following problems:
 * Follow Logs of multiple pods (WIP)
 * Exec into multiple pods with an interactive shell (WIP)
 
-## Getting Started
+## Prerequisites
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
-### Prerequisites
-
-#### Runtime
+### Runtime
 
 * A functional Kubernetes cluster (tested with >= 1.17)
 
-#### Development
+### Development
 
 * [Golang](https://golang.org/) >= 1.15
 * [pre-commit](https://pre-commit.com/) >= 2.0
 
-### Installation
+## Installation
 
-#### MacOS
+### MacOS
 
 You can install the tool via Homebrew and the tap repository can be found [here.](https://github.com/dhenkel92/homebrew-tap)
 ```
@@ -80,7 +74,7 @@ brew upgrade dhenkel92/tap/pod-helper
 ```
 
 
-#### Other distributions
+### Other distributions
 
 See the [Releases page](https://github.com/dhenkel92/pod-helper/releases) for a list of Peek packages for various distributions.
 
