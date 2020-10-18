@@ -39,6 +39,16 @@ func main() {
 				Aliases: []string{"all", "a"},
 				Value:   false,
 			},
+			&cli.Int64Flag{
+				Name:    "container-index",
+				Aliases: []string{"ci"},
+				Value:   -1,
+			},
+			&cli.StringFlag{
+				Name:    "container",
+				Aliases: []string{"con"},
+				Value:   "",
+			},
 		},
 		Commands: []*cli.Command{
 			{
@@ -64,11 +74,6 @@ func main() {
 				Usage:  "logs",
 				Action: commands.Logs,
 				Flags: []cli.Flag{
-					&cli.Int64Flag{
-						Name:    "container-index",
-						Aliases: []string{"ci"},
-						Value:   -1,
-					},
 					&cli.Int64Flag{
 						Name:    "tail",
 						Aliases: []string{"t"},

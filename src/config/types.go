@@ -4,6 +4,10 @@ type Config struct {
 	Kubeconfig string
 	Namespace  string
 	Labels     []string
+
+	ContainerIndex int64
+	Container      string
+
 	RunConfig  RunConfig
 	LogsConfig LogsConfig
 }
@@ -14,6 +18,5 @@ type RunConfig struct {
 }
 
 type LogsConfig struct {
-	ContainerIndex int64
-	Tail           int64
+	Tail int64
 }

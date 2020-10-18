@@ -7,11 +7,11 @@ import (
 	v1 "k8s.io/api/core/v1"
 )
 
-func (podExec *PodExecutor) Logs(c chan ExecResult, conf *config.Config, pod *v1.Pod) {
-	options := v1.PodLogOptions{}
-	if conf.LogsConfig.ContainerIndex >= 0 {
-		options.Container = pod.Spec.Containers[conf.LogsConfig.ContainerIndex].Name
+func (podExec *PodExecutor) Logs(c chan ExecResult, conf *config.Config, pod *v1.Pod, container *v1.Container) {
+	options := v1.PodLogOptions{
+		Container: container.Name,
 	}
+
 	if conf.LogsConfig.Tail >= 0 {
 		options.TailLines = &conf.LogsConfig.Tail
 	}
@@ -32,6 +32,5 @@ func (podExec *PodExecutor) Logs(c chan ExecResult, conf *config.Config, pod *v1
 		return
 	}
 
-	str := buf.String()
-	c <- ExecResult{StdOut: str}
+	c <- ExecResult{StdOut: buf.String()}
 }

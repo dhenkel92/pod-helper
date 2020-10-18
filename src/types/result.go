@@ -11,16 +11,17 @@ import (
 type Result struct {
 	ExecResult kube.ExecResult
 	Pod        v1.Pod
+	Container  v1.Container
 }
 
 func (result *Result) Print() {
 	var text string
 	var resText string
 	if result.ExecResult.Error == nil {
-		text = aurora.Sprintf(aurora.Green("Success on %s"), result.Pod.Name)
+		text = aurora.Sprintf(aurora.Green("Success on %s; Container %s"), result.Pod.Name, result.Container.Name)
 		resText = result.ExecResult.StdOut
 	} else {
-		text = aurora.Sprintf(aurora.Red("Failed on %s"), result.Pod.Name)
+		text = aurora.Sprintf(aurora.Red("Failed on %s; Container %s"), result.Pod.Name, result.Container.Name)
 		resText = result.ExecResult.StdOut
 	}
 

@@ -8,7 +8,7 @@ import (
 	"k8s.io/client-go/tools/remotecommand"
 )
 
-func (podExec *PodExecutor) Run(c chan ExecResult, conf *config.Config, pod *v1.Pod) {
+func (podExec *PodExecutor) Run(c chan ExecResult, conf *config.Config, pod *v1.Pod, container *v1.Container) {
 	req := podExec.Clientset.
 		CoreV1().
 		RESTClient().
@@ -19,10 +19,11 @@ func (podExec *PodExecutor) Run(c chan ExecResult, conf *config.Config, pod *v1.
 		SubResource("exec")
 
 	option := &v1.PodExecOptions{
-		Command: append(conf.RunConfig.Entrypoint, conf.RunConfig.Command),
-		Stdin:   false,
-		Stdout:  true,
-		Stderr:  true,
+		Container: container.Name,
+		Command:   append(conf.RunConfig.Entrypoint, conf.RunConfig.Command),
+		Stdin:     false,
+		Stdout:    true,
+		Stderr:    true,
 	}
 
 	req.VersionedParams(option, scheme.ParameterCodec)
