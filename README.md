@@ -26,7 +26,6 @@
 * [Prerequisites](#prerequisites)
 * [Installation](#installation)
 * [Usage](#usage)
-* [Roadmap](#roadmap)
 * [Contributing](#contributing)
 * [License](#license)
 * [Contact](#contact)
@@ -113,8 +112,3 @@ Project Link: [https://github.com/dhenkel92/pod-helper](https://github.com/dhenk
 * [Aurora](https://github.com/logrusorgru/aurora)
 * [Choose an Open Source License](https://choosealicense.com)
 * [README template](https://github.com/othneildrew/Best-README-Template)
-
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[product-screenshot]:
