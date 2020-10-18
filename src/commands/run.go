@@ -21,12 +21,12 @@ func Run(c *cli.Context) error {
 		return err
 	}
 
-	pods, err := kube.ListPods(clientset, cliConf.Namespace, cliConf.Labels)
+	pods, err := kube.ListPods(clientset, cliConf.Namespaces, cliConf.Labels)
 	if err != nil {
 		return err
 	}
 
-	for _, pod := range pods.Items {
+	for _, pod := range pods {
 		containers, err := utils.FilterContainers(&pod.Spec.Containers, &cliConf)
 		if err != nil {
 			result := types.Result{ExecResult: kube.ExecResult{Error: err, StdOut: err.Error()}, Pod: pod}

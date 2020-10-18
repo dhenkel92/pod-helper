@@ -103,32 +103,38 @@ pod-helper -n default run -c "ls -al"
 
 Run `ls -al` in all the pods
 ```shell script
-pod-helper --all-namespaces run --comand "ls -al"
+pod-helper run --comand "ls -al"
 or short
-pod-helper -a run -c "ls -al"
+pod-helper run -c "ls -al"
 ```
 
 Override the etnrypoint for the command execution (default `/bin/sh -c`)
 ```shell script
-pod-helper --all-namespaces run --entrypoint "/bin/bash -c" --comand "ls -al"
+pod-helper run --entrypoint "/bin/bash -c" --comand "ls -al"
 or short
-pod-helper -a run -e "/bin/bash -c" -c "ls -al"
+pod-helper run -e "/bin/bash -c" -c "ls -al"
 ```
 
-Select pod by label selector
+Select pod by label selector in default namespace
 ```shell script
-pod-helper --all-namespaces --label app=nginx run --command "ls -al"
+pod-helper --namespace default --label app=nginx run --command "ls -al"
 or short
-pod-helper -a -l app=nginx run --command "ls -al"
+pod-helper -n default -l app=nginx run --command "ls -al"
 ```
+
+Run a command on all the pods in the namespace default and kube-system
+```shell script
+pod-helper --namespace default --namespace kube-system --label app=nginx run --command "ls -al"
+or short
+pod-helper -n default -n kube-system -l app=nginx run --command "ls -al"
 
 ### Logs
 
 Get all logs from all the pods in the cluster
 ```shell script
-pod-helper --all-namespaces logs
+pod-helper logs
 or short
-pod-helper -a logs
+pod-helper logs
 ```
 
 Get all logs from all pods in the kube-system namespace
@@ -140,23 +146,23 @@ pod-helper -n kube-system logs
 
 Get the last ten log entries of all the pods
 ```shell script
-pod-helper --all-namespaces logs --tail 10
+pod-helper logs --tail 10
 or short
-pod-helper -a logs -t 10
+pod-helper logs -t 10
 ```
 
 Get logs of the first container in all pods in the cluster
 ```shell script
-pod-helper --all-namespaces --container-index 0 logs
+pod-helper --container-index 0 logs
 or short
-pod-helper -a -ci 0 logs
+pod-helper -ci 0 logs
 ```
 
 Get logs of containers mit name `nginx`.
 ```shell script
-pod-helper --all-namespaces --container nginx logs
+pod-helper --container nginx logs
 or short
-pod-helper -a -con nginx logs
+pod-helper -con nginx logs
 ```
 
 ## Contributing

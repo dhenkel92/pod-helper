@@ -30,11 +30,10 @@ func main() {
 				Usage:   "path to the kubeconfig file that will be used to authenticate to your cluster.",
 				Value:   filepath.Join(homedir.HomeDir(), ".kube", "config"),
 			},
-			&cli.StringFlag{
+			&cli.StringSliceFlag{
 				Name:     "namespace",
 				Aliases:  []string{"n"},
-				Usage:    "the namespace that is used for discovering the pods.",
-				Value:    "default",
+				Usage:    "the namespaces that are used for discovering the pods. If none is set it will use all of them.",
 				Required: false,
 			},
 			&cli.StringSliceFlag{
@@ -43,12 +42,6 @@ func main() {
 				Aliases:  []string{"l"},
 				Value:    &cli.StringSlice{},
 				Required: false,
-			},
-			&cli.BoolFlag{
-				Name:    "all-namespaces",
-				Usage:   "if set to true, it will use all pods that are available in your cluster.",
-				Aliases: []string{"all", "a"},
-				Value:   false,
 			},
 			&cli.Int64Flag{
 				Name:    "container-index",

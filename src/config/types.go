@@ -2,7 +2,7 @@ package config
 
 type Config struct {
 	Kubeconfig string
-	Namespace  string
+	Namespaces []string
 	Labels     []string
 
 	ContainerIndex int64

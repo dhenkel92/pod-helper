@@ -8,11 +8,20 @@ import (
 	"strings"
 )
 
-func ListPods(client *kubernetes.Clientset, namespace string, labels []string) (*v1.PodList, error) {
+func listPodsForNamespace(client *kubernetes.Clientset, namespace string, labels []string) ([]v1.Pod, error) {
 	pods, err := client.CoreV1().Pods(namespace).List(metav1.ListOptions{LabelSelector: strings.Join(labels, ",")})
 	if err != nil {
 		return nil, err
 	}
 	log.Trace.Printf("%d pods in ns %s\n", len(pods.Items), namespace)
-	return pods, err
+	return pods.Items, err
+}
+
+func ListPods(client *kubernetes.Clientset, namespaces []string, labels []string) ([]v1.Pod, error) {
+	var results []v1.Pod
+	for _, ns := range namespaces {
+		pods, _ := listPodsForNamespace(client, ns, labels)
+		results = append(results, pods...)
+	}
+	return results, nil
 }
