@@ -127,6 +127,7 @@ Run a command on all the pods in the namespace default and kube-system
 pod-helper --namespace default --namespace kube-system --label app=nginx run --command "ls -al"
 or short
 pod-helper -n default -n kube-system -l app=nginx run --command "ls -al"
+```
 
 ### Logs
 
