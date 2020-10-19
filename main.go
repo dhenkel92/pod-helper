@@ -2,10 +2,11 @@ package main
 
 import (
 	"fmt"
-	"k8s.io/client-go/util/homedir"
 	"os"
 	"path/filepath"
 	"sort"
+
+	"k8s.io/client-go/util/homedir"
 
 	"github.com/dhenkel92/pod-helper/src/commands"
 	"github.com/dhenkel92/pod-helper/src/log"
@@ -35,6 +36,7 @@ func main() {
 				Aliases:  []string{"n"},
 				Usage:    "the namespaces that are used for discovering the pods. If none is set it will use all of them.",
 				Required: false,
+				Value:    cli.NewStringSlice(""),
 			},
 			&cli.StringSliceFlag{
 				Name:     "labels",
