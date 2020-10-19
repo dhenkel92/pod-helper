@@ -14,21 +14,35 @@ type Result struct {
 	Container  v1.Container
 }
 
-func (result *Result) Print() {
-	var text string
-	var resText string
-	if result.ExecResult.Error == nil {
-		text = aurora.Sprintf(aurora.Green("Success on %s; Container %s"), result.Pod.Name, result.Container.Name)
-		resText = result.ExecResult.StdOut
-	} else {
-		text = aurora.Sprintf(aurora.Red("Failed on %s; Container %s"), result.Pod.Name, result.Container.Name)
-		resText = result.ExecResult.StdOut
+func (result *Result) printString(str string, isError bool) {
+	podName := aurora.Green(result.Pod.Name)
+	if isError {
+		podName = aurora.Red(result.Pod.Name)
 	}
 
-	lineByLine := strings.Split(resText, "\n")
+	lineByLine := strings.Split(str, "\n")
+	for _, line := range lineByLine {
+		if line == "" {
+			continue
+		}
+		log.Raw.Printf("%s/%s: %s", podName, aurora.Gray(14, result.Container.Name), line)
+	}
+}
 
-	log.Info.Println("----------------------------------------")
-	log.Info.Println(text)
-	log.Info.Printf("Result:\n\n\t%s", strings.Join(lineByLine, "\n\t"))
-	log.Info.Println("----------------------------------------")
+func (result *Result) Print() {
+	if result.ExecResult.Error == nil {
+		result.printString(result.ExecResult.StdOut, false)
+	} else {
+		result.printString("Failed:\n", true)
+		result.printString(result.ExecResult.Error.Error(), true)
+		if result.ExecResult.StdOut != "" {
+			result.printString(result.ExecResult.StdOut, true)
+		}
+		if result.ExecResult.StdErr != "" {
+			result.printString(result.ExecResult.StdErr, true)
+		}
+	}
+	// Add a line break after all the lines were printed to the screen
+	// so that the results / container are easier to differntiate.
+	log.Raw.Println("")
 }

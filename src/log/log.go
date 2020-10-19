@@ -11,6 +11,7 @@ var (
 	Info    *log.Logger
 	Warning *log.Logger
 	Error   *log.Logger
+	Raw     *log.Logger
 )
 
 func init() {
@@ -29,4 +30,9 @@ func init() {
 	Error = log.New(os.Stderr,
 		"ERROR: ",
 		log.Ltime)
+
+	Raw = log.New(os.Stdout,
+		"",
+		log.Ltime)
+	Raw.SetFlags(0)
 }
