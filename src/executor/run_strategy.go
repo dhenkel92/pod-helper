@@ -1,25 +1,27 @@
-package kube
+package executor
 
 import (
 	"bytes"
+
 	"github.com/dhenkel92/pod-helper/src/config"
+	"github.com/dhenkel92/pod-helper/src/types"
 	v1 "k8s.io/api/core/v1"
 	"k8s.io/client-go/kubernetes/scheme"
 	"k8s.io/client-go/tools/remotecommand"
 )
 
-func (podExec *PodExecutor) Run(c chan ExecResult, conf *config.Config, pod *v1.Pod, container *v1.Container) {
-	req := podExec.Clientset.
+func RunStrategy(c chan bool, podExecutor *PodExecutor, conf *config.Config, result *types.Result) {
+	req := podExecutor.Clientset.
 		CoreV1().
 		RESTClient().
 		Post().
 		Resource("pods").
-		Name(pod.Name).
-		Namespace(pod.Namespace).
+		Name(result.Pod.Name).
+		Namespace(result.Pod.Namespace).
 		SubResource("exec")
 
 	option := &v1.PodExecOptions{
-		Container: container.Name,
+		Container: result.Container.Name,
 		Command:   append(conf.RunConfig.Entrypoint, conf.RunConfig.Command),
 		Stdin:     false,
 		Stdout:    true,
@@ -27,9 +29,10 @@ func (podExec *PodExecutor) Run(c chan ExecResult, conf *config.Config, pod *v1.
 	}
 
 	req.VersionedParams(option, scheme.ParameterCodec)
-	exec, err := remotecommand.NewSPDYExecutor(podExec.Config, "POST", req.URL())
+	exec, err := remotecommand.NewSPDYExecutor(podExecutor.Config, "POST", req.URL())
 	if err != nil {
-		c <- ExecResult{Error: err}
+		result.ExecResult = types.ExecResult{Error: err}
+		c <- true
 		return
 	}
 
@@ -39,9 +42,11 @@ func (podExec *PodExecutor) Run(c chan ExecResult, conf *config.Config, pod *v1.
 		Stderr: &stderr,
 	})
 	if err != nil {
-		c <- ExecResult{Error: err, StdErr: stderr.String(), StdOut: stdout.String()}
+		result.ExecResult = types.ExecResult{Error: err, StdErr: stderr.String(), StdOut: stdout.String()}
+		c <- true
 		return
 	}
 
-	c <- ExecResult{StdOut: stdout.String(), StdErr: stderr.String()}
+	result.ExecResult = types.ExecResult{StdOut: stdout.String(), StdErr: stderr.String()}
+	c <- true
 }

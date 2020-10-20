@@ -9,6 +9,7 @@ func NewConfigFromCliContext(c *cli.Context) Config {
 	kubeconfig := c.String("kubeconfig")
 	namespaces := c.StringSlice("namespace")
 	labels := c.StringSlice("labels")
+	batchSize := c.Int("batch-size")
 
 	runConfig := newRunConfig(c)
 	logsConfig := newLogsConfig(c)
@@ -20,6 +21,7 @@ func NewConfigFromCliContext(c *cli.Context) Config {
 
 		ContainerIndex: containerIndex,
 		Container:      container,
+		BatchSize:      batchSize,
 
 		RunConfig:  runConfig,
 		LogsConfig: logsConfig,

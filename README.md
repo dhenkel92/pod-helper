@@ -108,7 +108,7 @@ or short
 pod-helper run -c "ls -al"
 ```
 
-Override the etnrypoint for the command execution (default `/bin/sh -c`)
+Override the entrypoint for the command execution (default `/bin/sh -c`)
 ```shell script
 pod-helper run --entrypoint "/bin/bash -c" --comand "ls -al"
 or short

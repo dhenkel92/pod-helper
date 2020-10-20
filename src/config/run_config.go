@@ -1,8 +1,9 @@
 package config
 
 import (
-	"github.com/urfave/cli/v2"
 	"strings"
+
+	"github.com/urfave/cli/v2"
 )
 
 func newRunConfig(c *cli.Context) RunConfig {

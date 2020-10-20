@@ -1,11 +1,12 @@
 package kube
 
 import (
+	"strings"
+
 	"github.com/dhenkel92/pod-helper/src/log"
 	v1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
-	"strings"
 )
 
 func listPodsForNamespace(client *kubernetes.Clientset, namespace string, labels []string) ([]v1.Pod, error) {

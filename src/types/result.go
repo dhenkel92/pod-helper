@@ -1,15 +1,15 @@
 package types
 
 import (
-	"github.com/dhenkel92/pod-helper/src/kube"
+	"strings"
+
 	"github.com/dhenkel92/pod-helper/src/log"
 	"github.com/logrusorgru/aurora"
 	v1 "k8s.io/api/core/v1"
-	"strings"
 )
 
 type Result struct {
-	ExecResult kube.ExecResult
+	ExecResult ExecResult
 	Pod        v1.Pod
 	Container  v1.Container
 }

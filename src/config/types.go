@@ -7,6 +7,7 @@ type Config struct {
 
 	ContainerIndex int64
 	Container      string
+	BatchSize      int
 
 	RunConfig  RunConfig
 	LogsConfig LogsConfig

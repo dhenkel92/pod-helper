@@ -6,9 +6,12 @@ import (
 	"path/filepath"
 	"sort"
 
+	"github.com/dhenkel92/pod-helper/src/config"
+
+	"github.com/dhenkel92/pod-helper/src/executor"
+
 	"k8s.io/client-go/util/homedir"
 
-	"github.com/dhenkel92/pod-helper/src/commands"
 	"github.com/dhenkel92/pod-helper/src/log"
 	"github.com/urfave/cli/v2"
 )
@@ -57,12 +60,21 @@ func main() {
 				Aliases: []string{"con"},
 				Value:   "",
 			},
+			&cli.IntFlag{
+				Name:    "batch-size",
+				Usage:   "WIP",
+				Aliases: []string{"batch", "b"},
+				Value:   5,
+			},
 		},
 		Commands: []*cli.Command{
 			{
-				Name:   "run",
-				Usage:  "Runs a command in all the containers of all found pods.",
-				Action: commands.Run,
+				Name:  "run",
+				Usage: "Runs a command in all the containers of all found pods.",
+				Action: func(c *cli.Context) error {
+					conf := config.NewConfigFromCliContext(c)
+					return executor.Execute(&conf, executor.RunStrategy)
+				},
 				Flags: []cli.Flag{
 					&cli.StringFlag{
 						Name:     "entrypoint",
@@ -80,9 +92,12 @@ func main() {
 				},
 			},
 			{
-				Name:   "logs",
-				Usage:  "Returns the logs of all containers of all the found pods.",
-				Action: commands.Logs,
+				Name:  "logs",
+				Usage: "Returns the logs of all containers of all the found pods.",
+				Action: func(c *cli.Context) error {
+					conf := config.NewConfigFromCliContext(c)
+					return executor.Execute(&conf, executor.LogsStrategy)
+				},
 				Flags: []cli.Flag{
 					&cli.Int64Flag{
 						Name:    "tail",
