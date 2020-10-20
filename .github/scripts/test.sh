@@ -9,7 +9,8 @@ echo "" > $ROOT/coverage.txt
 
 for d in $(go list $ROOT/... | grep -v vendor); do
     go test -race -coverprofile=$ROOT/profile.out -covermode=atomic $d
-    if [ -f $ROOT/profile.out ]; then
+    lines=$(wc -l profile.out | awk '{print $1}')
+    if [ -f $ROOT/profile.out ] && [ "$lines" -gt "1" ]; then
         cat $ROOT/profile.out >> $ROOT/coverage.txt
         rm $ROOT/profile.out
     fi
