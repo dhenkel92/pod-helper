@@ -35,7 +35,7 @@ jobs:
       run: ./.github/scripts/test.sh
     - name: CodeCov
       run: bash <(curl -s https://codecov.io/bash)
-      with:
+      env:
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
   build:
     runs-on: ubuntu-latest
