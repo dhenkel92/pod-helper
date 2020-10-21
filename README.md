@@ -39,7 +39,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-![Product Name Screen Shot](images/pod_helper_example.gif)
+![Product Name Screen Shot](images/pod_helper_exp.gif)
 
 In my day to day job i often need to debug pods in a kubernetes cluster or need to get logs from all of them. However, with the default tools, provided by kubernetes, it's super hard and time consuming to do it.
 This is why I decided to build a small helper tool in order to keep us productive and less annoyed.
