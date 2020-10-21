@@ -26,6 +26,7 @@
 * [Prerequisites](#prerequisites)
 * [Installation](#installation)
 * [Usage](#usage)
+  * [General](#general)
   * [Run](#run)
   * [Logs](#logs)
 * [Contributing](#contributing)
@@ -90,6 +91,13 @@ Use different .kubeconfig file than `~/.kube/config`
 pod-helper --kubeconfig /kube/config logs
 or short
 pod-helper -config /kube/config logs
+```
+
+By default, the pod-helper is executing the command against five containers in parallel. This can be updated in the following way
+```shell script
+pod-helper --batch-size 10 logs
+or short
+pod-helper -b 10 logs
 ```
 
 ### Run

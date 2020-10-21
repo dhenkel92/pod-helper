@@ -62,7 +62,7 @@ func main() {
 			},
 			&cli.IntFlag{
 				Name:    "batch-size",
-				Usage:   "WIP",
+				Usage:   "specify on how many pods the given command is executed in parallel. This is also used for getting the logs from multiple containers.",
 				Aliases: []string{"batch", "b"},
 				Value:   5,
 			},
