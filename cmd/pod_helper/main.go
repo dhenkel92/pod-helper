@@ -24,7 +24,7 @@ var (
 
 func main() {
 	app := &cli.App{
-		Name:    "pod-exec",
+		Name:    "pod-helper",
 		Usage:   "A tool to easily operate on mutliple pods at the same time.",
 		Version: fmt.Sprintf("%s, built on %s (%s)", version, date, commit),
 		Flags: []cli.Flag{

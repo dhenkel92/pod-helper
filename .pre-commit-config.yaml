@@ -11,6 +11,8 @@ repos:
     hooks:
       - id: go-fmt
       - id: go-imports
-      - id: go-vet
+# todo: hook does not support multiple binaries in one repo
+# https://github.com/dnephin/pre-commit-golang/issues/30
+#      - id: go-vet
 #      - id: go-lint
       - id: go-cyclo
