@@ -25,15 +25,25 @@ builds:
       - windows
       - darwin
 archives:
-  - replacements:
+  - name_template: "pod-helper_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    id: pod-helper
+    replacements:
       darwin: Darwin
       linux: Linux
       windows: Windows
       386: i386
       amd64: x86_64
-
     builds:
       - pod-helper
+  - name_template: "kubectl-dsh_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    id: kubectl-dsh
+    replacements:
+      darwin: Darwin
+      linux: Linux
+      windows: Windows
+      386: i386
+      amd64: x86_64
+    builds:
       - kubectl-dsh
 checksum:
   name_template: 'checksums.txt'
@@ -45,10 +55,26 @@ brews:
       name: homebrew-tap
       token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
     folder: Formula
+    name: pod-helper
+    ids:
+      - pod-helper
+      - kubectl-dsh
     homepage: https://github.com/dhenkel92/pod-helper
     description: Kubernetes Pod Helper Util
     test: |
       system "#{bin}/pod-helper -h"
+  - tap:
+      owner: dhenkel92
+      name: homebrew-tap
+      token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
+    folder: Formula
+    name: kubectl-dsh
+    ids:
+      - kubectl-dsh
+    homepage: https://github.com/dhenkel92/pod-helper
+    description: Kubernetes DSH Plugin
+    test: |
+      system "#{bin}/kubectl-dsh -h"
 changelog:
   sort: asc
   filters:
