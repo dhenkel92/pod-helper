@@ -6,13 +6,14 @@ import (
 	"path/filepath"
 	"sort"
 
-	"github.com/dhenkel92/pod-helper/src/config"
+	"github.com/dhenkel92/pod-helper/pkg/config"
 
-	"github.com/dhenkel92/pod-helper/src/executor"
+	"github.com/dhenkel92/pod-helper/pkg/executor"
 
+	_ "k8s.io/client-go/plugin/pkg/client/auth"
 	"k8s.io/client-go/util/homedir"
 
-	"github.com/dhenkel92/pod-helper/src/log"
+	"github.com/dhenkel92/pod-helper/pkg/log"
 	"github.com/urfave/cli/v2"
 )
 

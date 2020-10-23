@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"io"
 
-	"github.com/dhenkel92/pod-helper/src/config"
-	"github.com/dhenkel92/pod-helper/src/types"
+	"github.com/dhenkel92/pod-helper/pkg/config"
+	"github.com/dhenkel92/pod-helper/pkg/types"
 	v1 "k8s.io/api/core/v1"
 )
 

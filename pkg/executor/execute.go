@@ -1,10 +1,10 @@
 package executor
 
 import (
-	"github.com/dhenkel92/pod-helper/src/config"
-	"github.com/dhenkel92/pod-helper/src/kube"
-	"github.com/dhenkel92/pod-helper/src/types"
-	"github.com/dhenkel92/pod-helper/src/utils"
+	"github.com/dhenkel92/pod-helper/pkg/config"
+	"github.com/dhenkel92/pod-helper/pkg/kube"
+	"github.com/dhenkel92/pod-helper/pkg/types"
+	"github.com/dhenkel92/pod-helper/pkg/utils"
 	v1 "k8s.io/api/core/v1"
 )
 

@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/dhenkel92/pod-helper/src/config"
+	"github.com/dhenkel92/pod-helper/pkg/config"
 	v1 "k8s.io/api/core/v1"
 )
 

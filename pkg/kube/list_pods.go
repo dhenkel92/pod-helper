@@ -3,7 +3,7 @@ package kube
 import (
 	"strings"
 
-	"github.com/dhenkel92/pod-helper/src/log"
+	"github.com/dhenkel92/pod-helper/pkg/log"
 	v1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"

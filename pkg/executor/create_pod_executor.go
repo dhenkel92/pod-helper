@@ -1,7 +1,7 @@
 package executor
 
 import (
-	"github.com/dhenkel92/pod-helper/src/kube"
+	"github.com/dhenkel92/pod-helper/pkg/kube"
 )
 
 func NewPodExecutor(kubeconfigPath string) (*PodExecutor, error) {

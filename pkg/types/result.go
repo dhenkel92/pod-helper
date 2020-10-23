@@ -3,7 +3,7 @@ package types
 import (
 	"strings"
 
-	"github.com/dhenkel92/pod-helper/src/log"
+	"github.com/dhenkel92/pod-helper/pkg/log"
 	"github.com/logrusorgru/aurora"
 	v1 "k8s.io/api/core/v1"
 )
