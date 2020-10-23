@@ -35,6 +35,7 @@ archives:
       amd64: x86_64
     builds:
       - pod-helper
+      - kubectl-dsh
   - name_template: "kubectl-dsh_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
     id: kubectl-dsh
     replacements:
@@ -58,7 +59,6 @@ brews:
     name: pod-helper
     ids:
       - pod-helper
-      - kubectl-dsh
     homepage: https://github.com/dhenkel92/pod-helper
     description: Kubernetes Pod Helper Util
     test: |
